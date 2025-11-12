@@ -1,0 +1,165 @@
+
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>桃園長照 LINE 入口｜A單位・日照中心・居家服務・福安學院</title>
+  <meta name="description" content="福安長照體系一站式 LINE 入口。依服務（A單位、日照中心、居家服務、福安學院）與地區（大園、蘆竹、中壢、桃園、青埔）快速加入與聯絡。" />
+  <meta property="og:title" content="桃園長照 LINE 入口｜福安長照體系" />
+  <meta property="og:description" content="選擇你的服務與地區，立即加入對應單位的 LINE 好友。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/upload/images/202505311911288rtod.png" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta name="theme-color" content="#2768e8" />
+  <style>
+    /* (Use the styles constructed in the previous message for brevity) */
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei","Helvetica Neue",Arial,sans-serif;margin:0;color:#0f172a;background:#f7f9fc}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px 14px 64px}
+    .hero{background:linear-gradient(135deg,#eff6ff 0%,#ecfeff 100%);border-radius:20px;box-shadow:0 2px 14px rgba(2,6,23,.06);padding:12px;display:flex;gap:12px;align-items:center}
+    .hero .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .pill{padding:10px 14px;border-radius:999px;border:1px solid #cfe3ff;background:#e8f1ff;color:#075985;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
+    .pill[aria-pressed="true"]{background:#2768e8;color:#fff;border-color:#2768e8}
+    .panel{background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(2,6,23,.06);padding:12px;margin-top:12px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:#e2e8f0;border:1px solid #e2e8f0;color:#0f172a;font-size:13px;padding:8px 10px;border-radius:999px;cursor:pointer}
+    #groups{scroll-margin-top:14px}
+    .group{margin-top:16px;background:#fff;border-radius:14px;border:1px solid #e5e7eb;padding:10px}
+    .grid{display:grid;gap:12px;grid-template-columns:1fr}
+    @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+    @media(min-width:1040px){.grid{grid-template-columns:1fr 1fr 1fr}}
+    .card{border:1px solid #e5e7eb;border-radius:14px;padding:12px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;background:#fff}
+    .title{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+    .code{font-size:12px;background:#f1f5f9;padding:3px 8px;border-radius:999px}
+    .badge{font-size:12px;background:#eef2ff;color:#3730a3;padding:3px 8px;border-radius:999px}
+    .meta{grid-column:1/-1;color:#475569;font-size:13px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid #e5e7eb}
+    .btn-line{background:#06c755;color:#fff;border-color:transparent}
+    .btn-line.is-off{background:#f3f4f6;color:#9ca3af;cursor:not-allowed}
+    .btn-call{background:#ecfeff;color:#155e75}
+    .smallnote{color:#64748b;font-size:12px;grid-column:1/-1}
+    .empty-card{border:1px dashed #cbd5e1;background:#f8fafc;color:#0f172a;border-radius:14px;padding:16px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <a class="logo" href="/" aria-label="回首頁"><img src="/upload/images/202505311911288rtod.png" alt="FuAn LOGO" width="56" height="56"></a>
+      <div class="text">
+        <h1>福安長照體系｜LINE 官方帳號入口</h1>
+        <p class="sub">選擇你的服務與地區，立即加入對應單位的 LINE 好友</p>
+        <div class="actions">
+          <button class="pill" data-s="CHC" aria-pressed="false">A單位</button>
+          <button class="pill" data-s="DC" aria-pressed="false">日照中心</button>
+          <button class="pill" data-s="HS" aria-pressed="false">居家服務</button>
+          <button class="pill" data-s="HQ" aria-pressed="false">福安學院</button>
+          <button class="pill" data-s="MI" aria-pressed="false">專業服務</button>
+        </div>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="chips" id="area-chips"></div>
+      <div class="chips" id="service-chips" style="margin-top:8px;"></div>
+    </section>
+
+    <section id="groups"></section>
+    <div id="empty" class="empty-card" hidden>
+      <div style="font-size:48px;margin-bottom:12px;">🔍</div>
+      <div style="font-weight:700;margin-bottom:8px;">找不到符合條件的單位</div>
+      <div style="color:#64748b;margin-bottom:12px;">建議加入「福安學院」由專人協助</div>
+      <a class="btn btn-line" id="empty-support" href="https://line.me/R/ti/p/%40817igqdq" target="_blank" rel="noopener">💬 加入 福安學院 ↗</a>
+    </div>
+  </div>
+
+  <script>
+    const UNITS = [{"code":"FNA1","name":"社團法人台灣福安照顧關懷服務協會","display":"A單位｜大園（社區整合中心）","areas":["大園區","大園"],"service":"CHC","dept_code":"CHC","address":"(33057)桃園市大園區中山南路二段663號2樓之1","tel":"03-3868700","line_id":"894drynx","email":"chc@fuancare.com.tw","hours":"","tags":["A單位","CHC","個管","大園"],"dept_ext":"7100","unit_ext":"7110"},{"code":"FNA2","name":"桃園市私立福安居家長照機構","display":"A單位｜蘆竹（社區整合中心）","areas":["蘆竹區","蘆竹"],"service":"CHC","dept_code":"CHC","address":"(33858)桃園市蘆竹區經國路892號16樓A室","tel":"03-3868700","line_id":"087ldyiq","email":"chc@fuancare.com.tw","hours":"","tags":["A單位","CHC","個管","蘆竹"],"dept_ext":"7100","unit_ext":"7120"},{"code":"FNA3","name":"社團法人台灣福安照顧關懷服務協會","display":"A單位｜中壢（社區整合中心）","areas":["中壢區","中壢"],"service":"CHC","dept_code":"CHC","address":"(33057)桃園市大園區中山南路二段663號2樓之1","tel":"03-3868700","line_id":"266zvzwk","email":"chc@fuancare.com.tw","hours":"","tags":["A單位","CHC","個管","中壢"],"dept_ext":"7100","unit_ext":"7130"},{"code":"QPDC","name":"智浩企業有限公司附設桃園市私立青埔綜合長照機構","display":"日照中心｜青埔（日照）","areas":["大園區","大園","青埔"],"service":"DayCare","dept_code":"DC","address":"(33057)桃園市大園區中山南路二段663號2樓","tel":"03-3868700","line_id":"360ejxng","email":"dc@fuancare.com.tw","hours":"","tags":["日照中心","青埔","大園"],"dept_ext":"7300","unit_ext":"7320"},{"code":"RSDC","name":"智浩企業有限公司附設桃園市私立瑞欣綜合長照機構","display":"日照中心｜瑞欣（桃園）","areas":["桃園區","桃園"],"service":"DayCare","dept_code":"DC","address":"(33057)桃園市桃園區龍鳳三街65巷38號1樓","tel":"03-3868700","line_id":"537uldqc","email":"dc@fuancare.com.tw","hours":"","tags":["日照中心","桃園"],"dept_ext":"7300","unit_ext":"7310"},{"code":"JGDC","name":"智浩企業有限公司附設桃園市私立經國社區長照機構","display":"日照中心｜經國（桃園）","areas":["桃園區","桃園"],"service":"DayCare","dept_code":"DC","address":"(33057)桃園市桃園區經國路286號4樓","tel":"03-3868700","line_id":"","email":"dc@fuancare.com.tw","hours":"","tags":["日照中心","桃園","經國"],"dept_ext":"7300","unit_ext":"7330"},{"code":"FNHS","name":"桃園市私立福安居家長照機構","display":"居家服務｜大園／蘆竹","areas":["大園區","大園","蘆竹區","蘆竹"],"service":"HomeCare","dept_code":"HS","address":"(33057)桃園市大園區中山南路二段663號2樓之1","tel":"03-3868700","line_id":"960vdgmj","email":"hs@fuancare.com.tw","hours":"","tags":["居家服務","到宅","大園","蘆竹"],"dept_ext":"7200","unit_ext":"7210"},{"code":"RSHS","name":"智浩企業有限公司附設桃園市私立瑞欣綜合長照機構","display":"居家服務｜瑞欣（桃園）","areas":["桃園區","桃園"],"service":"HomeCare","dept_code":"HS","address":"(33057)桃園市桃園區龍鳳三街65巷38號1樓","tel":"03-3696882","line_id":"807tlqud","email":"hs@fuancare.com.tw","hours":"","tags":["居家服務","到宅","桃園"],"dept_ext":"7200","unit_ext":"7220"},{"code":"QPHS","name":"智浩企業有限公司附設桃園市私立青埔綜合長照機構","display":"居家服務｜青埔","areas":["大園區","大園","青埔"],"service":"HomeCare","dept_code":"HS","address":"(33057)桃園市大園區中山南路二段663號2樓","tel":"03-3868700","line_id":"","email":"hs@fuancare.com.tw","hours":"","tags":["居家服務","到宅","青埔","大園"],"dept_ext":"7200","unit_ext":"7230"},{"code":"FNC1","name":"社團法人台灣福安照顧關懷服務協會","display":"福安學院｜課程中心（對外／內訓）","areas":["大園區","大園"],"service":"Admin","dept_code":"MAN","address":"(33057)桃園市大園區中山南路二段663號2樓","tel":"03-3868700","line_id":"817igqdq","email":"fnc@fuancare.com.tw","hours":"","tags":["課程","內訓","協會","大園"],"dept_ext":"7000","unit_ext":""},{"code":"FNCC","name":"福安聯合治療所","display":"專業服務｜聯合治療（物理／語言／心理）","areas":["桃園區","桃園"],"service":"Therapy","dept_code":"MI","address":"(33045)桃園市桃園區中正路1195號6樓","tel":"03-2737788","line_id":"928romsz","email":"fncc@fuancare.com.tw","hours":"","tags":["專業服務","復健","物理治療","語言治療","心理諮商","職能治療","營養","桃園"],"dept_ext":"7400","unit_ext":"7410"},{"code":"FNPT","name":"福安物理治療所","display":"專業服務｜物理治療所","areas":["桃園區","桃園"],"service":"Therapy","dept_code":"MI","address":"(33045)桃園市桃園區中正路1195號6樓","tel":"03-2737788","line_id":"928romsz","email":"fncc@fuancare.com.tw","hours":"","tags":["專業服務","物理治療","桃園"],"dept_ext":"7400","unit_ext":"7430"},{"code":"FNST","name":"福安語言治療所","display":"專業服務｜語言治療所","areas":["桃園區","桃園"],"service":"Therapy","dept_code":"MI","address":"(33045)桃園市桃園區中正路1195號6樓","tel":"03-2737788","line_id":"928romsz","email":"fncc@fuancare.com.tw","hours":"","tags":["專業服務","語言治療","桃園"],"dept_ext":"7400","unit_ext":"7440"},{"code":"FNPH","name":"福安心理治療所","display":"專業服務｜心理治療所","areas":["桃園區","桃園"],"service":"Therapy","dept_code":"MI","address":"(33045)桃園市桃園區中正路1195號6樓","tel":"03-2737788","line_id":"928romsz","email":"fncc@fuancare.com.tw","hours":"","tags":["專業服務","心理諮商","桃園"],"dept_ext":"7400","unit_ext":"7450"},{"code":"FUAN","name":"福安居家物理治療所","display":"專業服務｜居家物理治療（到宅）","areas":["桃園區","桃園"],"service":"Therapy","dept_code":"MI","address":"(33045)桃園市桃園區中正路1195號6樓","tel":"03-3868700","line_id":"","email":"fncc@fuancare.com.tw","hours":"","tags":["專業服務","到宅復健","物理治療","桃園"],"dept_ext":"7400","unit_ext":""},{"code":"MAN1","name":"智浩企業有限公司 總管理部","display":"員工總機（員工專用）","areas":["大園區","大園"],"service":"Admin","dept_code":"MAN","address":"(33057)桃園市大園區中山南路二段663號2樓","tel":"03-3868700","line_id":"268ufpzb","email":"man@fuancare.com.tw","hours":"","tags":["總機","員工專用","大園"],"dept_ext":"7000","unit_ext":"7000"}];
+    const SERVICE_CODE = {"HomeCare":"HS","DayCare":"DC","Therapy":"MI","CHC":"CHC","Admin":"HQ"};
+    const SERVICE_LABEL = {"CHC":"A單位","DC":"日照中心","HS":"居家服務","HQ":"福安學院","MI":"專業服務"};
+    const SERVICE_ORDER = ["CHC","DC","HS","HQ","MI"];
+
+    const state = { q:"", s:new Set(), a:new Set() };
+    const $groups = document.getElementById('groups');
+    const $empty = document.getElementById('empty');
+    const $pills = Array.from(document.querySelectorAll('.pill[data-s]'));
+    const $areaChips = document.getElementById('area-chips');
+    const $serviceChips = document.getElementById('service-chips');
+
+    function normalize(s){ return (s||'').toString().toLowerCase().trim(); }
+    function uLine(u){ return (u.line_id||'').trim(); }
+    function telLink(u){ return 'tel:'+(u.tel||'').replace(/[^0-9+]/g,''); }
+    function lineLink(u){ return 'https://line.me/R/ti/p/%40'+uLine(u); }
+    function withUTM(url){ return url + (url.includes('?')?'&':'?') + 'utm_source=site&utm_medium=line_hub&utm_campaign=' + 'all-all'; }
+
+    function unitMatches(u){
+      if(state.s.size){ const code = SERVICE_CODE[u.service] || ''; if(!state.s.has(code)) return false; }
+      if(state.a.size){
+        const bases=new Set((u.areas||[]).map(x=>x.endsWith('區')?x.slice(0,-1):x)); let ok=false; state.a.forEach(a=>{ if(bases.has(a)) ok=true; });
+        if(!ok) return false;
+      }
+      return true;
+    }
+
+    function card(u){
+      const isEmployeeOnly = (u.code==='MAN1');
+      const hasLine = !!uLine(u);
+      const svcCode = SERVICE_CODE[u.service] || '';
+
+      const c=document.createElement('article'); c.className='card';
+      const left=document.createElement('div');
+      const title=document.createElement('div'); title.className='title';
+      const h3=document.createElement('h3'); h3.textContent=u.display||u.name;
+      const code=document.createElement('span'); code.className='code'; code.textContent=u.code;
+      const badge=document.createElement('span'); badge.className='badge'; badge.textContent=SERVICE_LABEL[svcCode]||'';
+      title.appendChild(h3); title.appendChild(code); title.appendChild(badge); left.appendChild(title);
+
+      const actions=document.createElement('div');
+      const btnLine=document.createElement('a'); btnLine.className='btn btn-line'; btnLine.textContent=isEmployeeOnly?'員工專用':'加入 LINE ↗';
+      if(isEmployeeOnly || !hasLine){ btnLine.classList.add('is-off'); btnLine.setAttribute('aria-disabled','true'); }
+      else { btnLine.href=withUTM(lineLink(u)); btnLine.target='_blank'; btnLine.rel='noopener'; }
+      const btnCall=document.createElement('a'); btnCall.className='btn btn-call'; btnCall.href=telLink(u); btnCall.textContent='撥打電話';
+      actions.appendChild(btnLine); actions.appendChild(btnCall);
+
+      const meta=document.createElement('div'); meta.className='meta';
+      const areasFull=(u.areas||[]).map(a=>a.endsWith('區')?a:a+'區').filter((v,i,self)=>self.indexOf(v)===i);
+      const deptExt = u.dept_ext ? `代表號：${u.dept_ext}` : '';
+      const unitExt = u.unit_ext ? `單位分機：${u.unit_ext}` : '';
+      meta.innerHTML = `
+        <span>服務區域：${areasFull.join('、')}</span>
+        <span>電話：<a href="${telLink(u)}">${(u.tel||'')}</a>${deptExt || unitExt ? '（'+[deptExt,unitExt].filter(Boolean).join('｜')+'）' : ''}</span>
+        <span>地址：${(u.address||'')}</span>
+      `;
+
+      const small=document.createElement('div'); small.className='smallnote'; small.textContent='實際服務以各單位公告為準。';
+
+      c.appendChild(left); c.appendChild(actions); c.appendChild(meta); c.appendChild(small);
+      return c;
+    }
+
+    function renderGroups(){
+      const filtered = UNITS.filter(unitMatches);
+      $groups.innerHTML = '';
+      if(!filtered.length){ $empty.hidden=false; return; }
+      $empty.hidden=true;
+      SERVICE_ORDER.forEach(code=>{
+        const items=filtered.filter(u => (SERVICE_CODE[u.service]||'')===code);
+        if(!items.length) return;
+        const group=document.createElement('section'); group.className='group';
+        const h2=document.createElement('h2'); h2.textContent=(SERVICE_LABEL[code]||code)+'（'+items.length+'）';
+        const grid=document.createElement('div'); grid.className='grid';
+        items.sort((a,b)=>{ const aOn=!!uLine(a), bOn=!!uLine(b); if(aOn!==bOn) return aOn?-1:1; return (a.code||'').localeCompare(b.code||''); });
+        items.forEach(u => grid.appendChild(card(u)));
+        group.appendChild(h2); group.appendChild(grid); $groups.appendChild(group);
+      });
+    }
+
+    // Init: chips + pills (chips kept simple here)
+    const areaBases = Array.from(new Set(UNITS.flatMap(u => (u.areas||[]).map(a=>a.endsWith('區')?a.slice(0,-1):a))));
+    areaBases.forEach(base=>{ const el=document.createElement('span'); el.className='chip'; el.textContent=base; el.addEventListener('click',()=>{ if(state.a.has(base)) state.a.delete(base); else state.a.add(base); el.classList.toggle('is-on'); renderGroups(); }); $areaChips.appendChild(el); });
+    ["CHC","DC","HS","HQ","MI"].forEach(code=>{ const el=document.createElement('span'); el.className='chip'; el.textContent=SERVICE_LABEL[code]; el.addEventListener('click',()=>{ if(state.s.has(code)) state.s.delete(code); else state.s.add(code); el.classList.toggle('is-on'); renderGroups(); }); $serviceChips.appendChild(el); });
+    document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{ const on=p.getAttribute('aria-pressed')==='true'; p.setAttribute('aria-pressed', on?'false':'true'); if(on) state.s.delete(p.dataset.s); else state.s.add(p.dataset.s); renderGroups(); document.getElementById('groups').scrollIntoView({behavior:'smooth'}); }));
+
+    renderGroups();
+  </script>
+</body>
+</html>
