@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="zh-Hant-TW">
 <head>
@@ -13,32 +12,94 @@
   <meta property="og:locale" content="zh_TW" />
   <meta name="theme-color" content="#2768e8" />
   <style>
-    /* (Use the styles constructed in the previous message for brevity) */
-    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei","Helvetica Neue",Arial,sans-serif;margin:0;color:#0f172a;background:#f7f9fc}
-    .wrap{max-width:1100px;margin:0 auto;padding:18px 14px 64px}
-    .hero{background:linear-gradient(135deg,#eff6ff 0%,#ecfeff 100%);border-radius:20px;box-shadow:0 2px 14px rgba(2,6,23,.06);padding:12px;display:flex;gap:12px;align-items:center}
-    .hero .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .pill{padding:10px 14px;border-radius:999px;border:1px solid #cfe3ff;background:#e8f1ff;color:#075985;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
-    .pill[aria-pressed="true"]{background:#2768e8;color:#fff;border-color:#2768e8}
-    .panel{background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(2,6,23,.06);padding:12px;margin-top:12px}
-    .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{background:#e2e8f0;border:1px solid #e2e8f0;color:#0f172a;font-size:13px;padding:8px 10px;border-radius:999px;cursor:pointer}
-    #groups{scroll-margin-top:14px}
-    .group{margin-top:16px;background:#fff;border-radius:14px;border:1px solid #e5e7eb;padding:10px}
-    .grid{display:grid;gap:12px;grid-template-columns:1fr}
-    @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
-    @media(min-width:1040px){.grid{grid-template-columns:1fr 1fr 1fr}}
-    .card{border:1px solid #e5e7eb;border-radius:14px;padding:12px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;background:#fff}
-    .title{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
-    .code{font-size:12px;background:#f1f5f9;padding:3px 8px;border-radius:999px}
-    .badge{font-size:12px;background:#eef2ff;color:#3730a3;padding:3px 8px;border-radius:999px}
-    .meta{grid-column:1/-1;color:#475569;font-size:13px;display:flex;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-block;padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid #e5e7eb}
-    .btn-line{background:#06c755;color:#fff;border-color:transparent}
-    .btn-line.is-off{background:#f3f4f6;color:#9ca3af;cursor:not-allowed}
-    .btn-call{background:#ecfeff;color:#155e75}
-    .smallnote{color:#64748b;font-size:12px;grid-column:1/-1}
-    .empty-card{border:1px dashed #cbd5e1;background:#f8fafc;color:#0f172a;border-radius:14px;padding:16px;text-align:center}
+    :root{color-scheme:light;}
+    :root[data-theme="dark"]{color-scheme:dark;}
+    *{box-sizing:border-box;}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei","Helvetica Neue",Arial,sans-serif;margin:0;color:#0f172a;background:#f7f9fc;line-height:1.5;}
+    :root[data-theme="dark"] body{background:#0b1120;color:#e2e8f0;}
+    a{color:inherit;}
+    button{font:inherit;cursor:pointer;border:none;background:none;}
+    .wrap{max-width:1100px;margin:0 auto;padding:18px 14px 64px;}
+    .hero{background:linear-gradient(135deg,#eff6ff 0%,#ecfeff 100%);border-radius:20px;box-shadow:0 2px 14px rgba(2,6,23,.06);padding:12px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between;}
+    :root[data-theme="dark"] .hero{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);box-shadow:none;border:1px solid rgba(148,163,184,.4);}
+    .hero .text{flex:1 1 260px;min-width:240px;}
+    .hero .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+    .pill{padding:10px 16px;border-radius:999px;border:1px solid #cfe3ff;background:#e8f1ff;color:#075985;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap;min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
+    .pill[aria-pressed="true"]{background:#2768e8;color:#fff;border-color:#2768e8;}
+    :root[data-theme="dark"] .pill{background:#1e3a8a;color:#bfdbfe;border-color:#1e3a8a;}
+    .theme-toggle{margin-left:auto;}
+    .panel{background:#fff;border-radius:16px;box-shadow:0 2px 10px rgba(2,6,23,.06);padding:16px;margin-top:12px;}
+    :root[data-theme="dark"] .panel{background:#1e293b;box-shadow:none;border:1px solid rgba(148,163,184,.4);}
+    .controls-panel{display:flex;flex-direction:column;gap:16px;}
+    .controls-top{display:flex;flex-direction:column;gap:12px;align-items:stretch;}
+    @media(min-width:640px){.controls-top{flex-direction:row;align-items:center;}}
+    .search{flex:1;position:relative;}
+    .search input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #cbd5e1;background:#fff;color:#0f172a;font-size:15px;}
+    .search input::placeholder{color:#94a3b8;}
+    :root[data-theme="dark"] .search input{background:#0f172a;color:#e2e8f0;border-color:#334155;}
+    .view-toggle{display:inline-flex;border:1px solid #cbd5e1;border-radius:999px;overflow:hidden;}
+    .view-toggle button{padding:10px 16px;min-height:44px;font-weight:600;background:#fff;color:#0f172a;}
+    .view-toggle button[aria-pressed="true"]{background:#2768e8;color:#fff;}
+    :root[data-theme="dark"] .view-toggle{border-color:#475569;}
+    :root[data-theme="dark"] .view-toggle button{background:transparent;color:#e2e8f0;}
+    .stats{display:flex;flex-wrap:wrap;gap:12px;font-size:14px;color:#334155;}
+    :root[data-theme="dark"] .stats{color:#cbd5f5;}
+    .filters-panel{display:flex;flex-direction:column;gap:20px;}
+    .filter-group{display:flex;flex-direction:column;gap:12px;}
+    .panel-title{margin:0;font-size:16px;font-weight:700;color:#0f172a;}
+    :root[data-theme="dark"] .panel-title{color:#e2e8f0;}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;}
+    .chip{padding:10px 14px;border-radius:999px;border:1px solid #cbd5e1;background:#e2e8f0;color:#0f172a;font-size:13px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
+    .chip[aria-pressed="true"]{background:#2768e8;color:#fff;border-color:#2768e8;}
+    :root[data-theme="dark"] .chip{background:#1f2937;color:#e2e8f0;border-color:#334155;}
+    :root[data-theme="dark"] .chip[aria-pressed="true"]{background:#1d4ed8;border-color:#1d4ed8;}
+    #groups{scroll-margin-top:14px;}
+    .group{margin-top:16px;background:#fff;border-radius:14px;border:1px solid #e5e7eb;padding:16px;}
+    :root[data-theme="dark"] .group{background:#0f172a;border-color:#334155;}
+    .group h2{margin:0 0 12px;font-size:18px;display:flex;gap:8px;align-items:center;}
+    .grid{display:grid;gap:12px;grid-template-columns:1fr;}
+    @media(min-width:640px){.grid{grid-template-columns:1fr 1fr;}}
+    @media(min-width:1040px){.grid{grid-template-columns:1fr 1fr 1fr;}}
+    .card{position:relative;border:1px solid #e5e7eb;border-radius:14px;padding:16px;display:grid;grid-template-columns:1fr;gap:12px;background:#fff;}
+    @media(min-width:640px){.card{grid-template-columns:1fr auto;}}
+    :root[data-theme="dark"] .card{background:#1e293b;border-color:#334155;}
+    .title{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+    .title h3{margin:0;font-size:18px;}
+    .code{font-size:12px;background:#f1f5f9;padding:3px 8px;border-radius:999px;}
+    :root[data-theme="dark"] .code{background:#334155;color:#e2e8f0;}
+    .badge{font-size:12px;background:#eef2ff;color:#3730a3;padding:3px 8px;border-radius:999px;}
+    :root[data-theme="dark"] .badge{background:#1d4ed8;color:#e0e7ff;}
+    .meta{grid-column:1/-1;color:#475569;font-size:13px;display:flex;gap:12px;flex-wrap:wrap;}
+    :root[data-theme="dark"] .meta{color:#cbd5f5;}
+    .card-actions{display:flex;flex-direction:column;gap:8px;}
+    @media(min-width:480px){.card-actions{flex-direction:row;flex-wrap:wrap;}}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;border-radius:10px;text-decoration:none;font-weight:700;border:1px solid #e5e7eb;min-height:44px;}
+    .btn-line{background:#06c755;color:#fff;border-color:transparent;}
+    .btn-line.is-off{background:#f3f4f6;color:#9ca3af;cursor:not-allowed;}
+    :root[data-theme="dark"] .btn-line.is-off{background:#334155;color:#94a3b8;}
+    .btn-call{background:#ecfeff;color:#155e75;}
+    :root[data-theme="dark"] .btn-call{background:#0ea5e9;color:#022c22;}
+    .btn-nav{background:#f1f5f9;color:#0f172a;}
+    :root[data-theme="dark"] .btn-nav{background:#334155;color:#e2e8f0;}
+    .fav-btn{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:50%;border:1px solid #e5e7eb;background:#fff;color:#facc15;font-size:20px;display:flex;align-items:center;justify-content:center;}
+    .fav-btn[aria-pressed="true"]{background:#facc15;color:#92400e;}
+    :root[data-theme="dark"] .fav-btn{background:#0f172a;border-color:#475569;}
+    :root[data-theme="dark"] .fav-btn[aria-pressed="true"]{background:#facc15;color:#1f2937;}
+    .smallnote{color:#64748b;font-size:12px;grid-column:1/-1;}
+    :root[data-theme="dark"] .smallnote{color:#cbd5f5;}
+    .panel-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;}
+    .suggestion-card{display:flex;flex-direction:column;gap:12px;}
+    @media(min-width:640px){.suggestion-card{flex-direction:row;align-items:center;justify-content:space-between;}}
+    #mapView{height:420px;border-radius:16px;overflow:hidden;}
+    #mapView[hidden]{display:none;}
+    #groups.hidden{display:none;}
+    .empty-card{border:1px dashed #cbd5e1;background:#f8fafc;color:#0f172a;border-radius:14px;padding:16px;text-align:center;margin-top:16px;}
+    :root[data-theme="dark"] .empty-card{background:#1e293b;color:#e2e8f0;border-color:#475569;}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+    .map-popup{max-width:260px;display:flex;flex-direction:column;gap:8px;}
+    .map-popup strong{display:block;font-size:16px;}
+    .map-popup .popup-actions{display:flex;flex-direction:column;gap:6px;}
+    .map-popup .btn{width:100%;}
   </style>
 </head>
 <body>
@@ -49,117 +110,724 @@
         <h1>福安長照體系｜LINE 官方帳號入口</h1>
         <p class="sub">選擇你的服務與地區，立即加入對應單位的 LINE 好友</p>
         <div class="actions">
-          <button class="pill" data-s="CHC" aria-pressed="false">A單位</button>
-          <button class="pill" data-s="DC" aria-pressed="false">日照中心</button>
-          <button class="pill" data-s="HS" aria-pressed="false">居家服務</button>
-          <button class="pill" data-s="HQ" aria-pressed="false">福安學院</button>
-          <button class="pill" data-s="MI" aria-pressed="false">專業服務</button>
+          <button class="pill" data-s="CHC" aria-pressed="false" type="button">A單位</button>
+          <button class="pill" data-s="DC" aria-pressed="false" type="button">日照中心</button>
+          <button class="pill" data-s="HS" aria-pressed="false" type="button">居家服務</button>
+          <button class="pill" data-s="HQ" aria-pressed="false" type="button">福安學院</button>
+          <button class="pill" data-s="MI" aria-pressed="false" type="button">專業服務</button>
         </div>
       </div>
+      <button class="pill theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="切換深色模式">🌙 深色模式</button>
     </div>
 
-    <section class="panel">
-      <div class="chips" id="area-chips"></div>
-      <div class="chips" id="service-chips" style="margin-top:8px;"></div>
+    <section class="panel controls-panel">
+      <div class="controls-top">
+        <label class="search">
+          <span class="sr-only">搜尋單位</span>
+          <input id="q" type="search" placeholder="搜尋單位、地區或關鍵字" autocomplete="off" inputmode="search" />
+        </label>
+        <div class="view-toggle" role="group" aria-label="視圖切換">
+          <button type="button" id="viewList" aria-pressed="true">列表</button>
+          <button type="button" id="viewMap" aria-pressed="false">地圖</button>
+        </div>
+      </div>
+      <div class="stats" id="stats">
+        <span id="statCount">共 0 個單位</span>
+        <span id="statAreas">地區：全部</span>
+      </div>
     </section>
 
-    <section id="groups"></section>
+    <section class="panel filters-panel" aria-label="服務與地區篩選">
+      <div class="filter-group">
+        <h2 class="panel-title">服務類型</h2>
+        <div class="chips" id="service-chips"></div>
+      </div>
+      <div class="filter-group">
+        <h2 class="panel-title">服務地區</h2>
+        <div class="chips" id="area-chips"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="favorites-section" hidden>
+      <div class="panel-header">
+        <h2 class="panel-title">我的收藏 <span class="badge" id="favorites-count">0</span></h2>
+      </div>
+      <div id="favorites-list" class="grid"></div>
+    </section>
+
+    <section class="panel suggestion-panel" id="suggestion" hidden>
+      <div class="suggestion-card">
+        <div>
+          <h2 class="panel-title">需要協助嗎？</h2>
+          <p style="margin:4px 0 0;">結果較少時，建議加入「福安學院」由專人協助媒合。</p>
+        </div>
+        <a class="btn btn-line" id="suggestion-link" href="https://line.me/R/ti/p/%40817igqdq" target="_blank" rel="noopener">💬 加入福安學院 ↗</a>
+      </div>
+    </section>
+
+    <div id="mapView" class="panel" hidden></div>
+
+    <section id="groups" aria-label="搜尋結果"></section>
+
     <div id="empty" class="empty-card" hidden>
       <div style="font-size:48px;margin-bottom:12px;">🔍</div>
       <div style="font-weight:700;margin-bottom:8px;">找不到符合條件的單位</div>
       <div style="color:#64748b;margin-bottom:12px;">建議加入「福安學院」由專人協助</div>
-      <a class="btn btn-line" id="empty-support" href="https://line.me/R/ti/p/%40817igqdq" target="_blank" rel="noopener">💬 加入 福安學院 ↗</a>
+      <a class="btn btn-line" id="empty-support" href="https://line.me/R/ti/p/%40817igqdq" target="_blank" rel="noopener">💬 加入福安學院 ↗</a>
     </div>
+
+    <div id="liveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
   </div>
 
   <script>
     const UNITS = [{"code":"FNA1","name":"社團法人台灣福安照顧關懷服務協會","display":"A單位｜大園（社區整合中心）","areas":["大園區","大園"],"service":"CHC","dept_code":"CHC","address":"(33057)桃園市大園區中山南路二段663號2樓之1","tel":"03-3868700","line_id":"894drynx","email":"chc@fuancare.com.tw","hours":"","tags":["A單位","CHC","個管","大園"],"dept_ext":"7100","unit_ext":"7110"},{"code":"FNA2","name":"桃園市私立福安居家長照機構","display":"A單位｜蘆竹（社區整合中心）","areas":["蘆竹區","蘆竹"],"service":"CHC","dept_code":"CHC","address":"(33858)桃園市蘆竹區經國路892號16樓A室","tel":"03-3868700","line_id":"087ldyiq","email":"chc@fuancare.com.tw","hours":"","tags":["A單位","CHC","個管","蘆竹"],"dept_ext":"7100","unit_ext":"7120"},{"code":"FNA3","name":"社團法人台灣福安照顧關懷服務協會","display":"A單位｜中壢（社區整合中心）","areas":["中壢區","中壢"],"service":"CHC","dept_code":"CHC","address":"(33057)桃園市大園區中山南路二段663號2樓之1","tel":"03-3868700","line_id":"266zvzwk","email":"chc@fuancare.com.tw","hours":"","tags":["A單位","CHC","個管","中壢"],"dept_ext":"7100","unit_ext":"7130"},{"code":"QPDC","name":"智浩企業有限公司附設桃園市私立青埔綜合長照機構","display":"日照中心｜青埔（日照）","areas":["大園區","大園","青埔"],"service":"DayCare","dept_code":"DC","address":"(33057)桃園市大園區中山南路二段663號2樓","tel":"03-3868700","line_id":"360ejxng","email":"dc@fuancare.com.tw","hours":"","tags":["日照中心","青埔","大園"],"dept_ext":"7300","unit_ext":"7320"},{"code":"RSDC","name":"智浩企業有限公司附設桃園市私立瑞欣綜合長照機構","display":"日照中心｜瑞欣（桃園）","areas":["桃園區","桃園"],"service":"DayCare","dept_code":"DC","address":"(33057)桃園市桃園區龍鳳三街65巷38號1樓","tel":"03-3868700","line_id":"537uldqc","email":"dc@fuancare.com.tw","hours":"","tags":["日照中心","桃園"],"dept_ext":"7300","unit_ext":"7310"},{"code":"JGDC","name":"智浩企業有限公司附設桃園市私立經國社區長照機構","display":"日照中心｜經國（桃園）","areas":["桃園區","桃園"],"service":"DayCare","dept_code":"DC","address":"(33057)桃園市桃園區經國路286號4樓","tel":"03-3868700","line_id":"","email":"dc@fuancare.com.tw","hours":"","tags":["日照中心","桃園","經國"],"dept_ext":"7300","unit_ext":"7330"},{"code":"FNHS","name":"桃園市私立福安居家長照機構","display":"居家服務｜大園／蘆竹","areas":["大園區","大園","蘆竹區","蘆竹"],"service":"HomeCare","dept_code":"HS","address":"(33057)桃園市大園區中山南路二段663號2樓之1","tel":"03-3868700","line_id":"960vdgmj","email":"hs@fuancare.com.tw","hours":"","tags":["居家服務","到宅","大園","蘆竹"],"dept_ext":"7200","unit_ext":"7210"},{"code":"RSHS","name":"智浩企業有限公司附設桃園市私立瑞欣綜合長照機構","display":"居家服務｜瑞欣（桃園）","areas":["桃園區","桃園"],"service":"HomeCare","dept_code":"HS","address":"(33057)桃園市桃園區龍鳳三街65巷38號1樓","tel":"03-3696882","line_id":"807tlqud","email":"hs@fuancare.com.tw","hours":"","tags":["居家服務","到宅","桃園"],"dept_ext":"7200","unit_ext":"7220"},{"code":"QPHS","name":"智浩企業有限公司附設桃園市私立青埔綜合長照機構","display":"居家服務｜青埔","areas":["大園區","大園","青埔"],"service":"HomeCare","dept_code":"HS","address":"(33057)桃園市大園區中山南路二段663號2樓","tel":"03-3868700","line_id":"","email":"hs@fuancare.com.tw","hours":"","tags":["居家服務","到宅","青埔","大園"],"dept_ext":"7200","unit_ext":"7230"},{"code":"FNC1","name":"社團法人台灣福安照顧關懷服務協會","display":"福安學院｜課程中心（對外／內訓）","areas":["大園區","大園"],"service":"Admin","dept_code":"MAN","address":"(33057)桃園市大園區中山南路二段663號2樓","tel":"03-3868700","line_id":"817igqdq","email":"fnc@fuancare.com.tw","hours":"","tags":["課程","內訓","協會","大園"],"dept_ext":"7000","unit_ext":""},{"code":"FNCC","name":"福安聯合治療所","display":"專業服務｜聯合治療（物理／語言／心理）","areas":["桃園區","桃園"],"service":"Therapy","dept_code":"MI","address":"(33045)桃園市桃園區中正路1195號6樓","tel":"03-2737788","line_id":"928romsz","email":"fncc@fuancare.com.tw","hours":"","tags":["專業服務","復健","物理治療","語言治療","心理諮商","職能治療","營養","桃園"],"dept_ext":"7400","unit_ext":"7410"},{"code":"FNPT","name":"福安物理治療所","display":"專業服務｜物理治療所","areas":["桃園區","桃園"],"service":"Therapy","dept_code":"MI","address":"(33045)桃園市桃園區中正路1195號6樓","tel":"03-2737788","line_id":"928romsz","email":"fncc@fuancare.com.tw","hours":"","tags":["專業服務","物理治療","桃園"],"dept_ext":"7400","unit_ext":"7430"},{"code":"FNST","name":"福安語言治療所","display":"專業服務｜語言治療所","areas":["桃園區","桃園"],"service":"Therapy","dept_code":"MI","address":"(33045)桃園市桃園區中正路1195號6樓","tel":"03-2737788","line_id":"928romsz","email":"fncc@fuancare.com.tw","hours":"","tags":["專業服務","語言治療","桃園"],"dept_ext":"7400","unit_ext":"7440"},{"code":"FNPH","name":"福安心理治療所","display":"專業服務｜心理治療所","areas":["桃園區","桃園"],"service":"Therapy","dept_code":"MI","address":"(33045)桃園市桃園區中正路1195號6樓","tel":"03-2737788","line_id":"928romsz","email":"fncc@fuancare.com.tw","hours":"","tags":["專業服務","心理諮商","桃園"],"dept_ext":"7400","unit_ext":"7450"},{"code":"FUAN","name":"福安居家物理治療所","display":"專業服務｜居家物理治療（到宅）","areas":["桃園區","桃園"],"service":"Therapy","dept_code":"MI","address":"(33045)桃園市桃園區中正路1195號6樓","tel":"03-3868700","line_id":"","email":"fncc@fuancare.com.tw","hours":"","tags":["專業服務","到宅復健","物理治療","桃園"],"dept_ext":"7400","unit_ext":""},{"code":"MAN1","name":"智浩企業有限公司 總管理部","display":"員工總機（員工專用）","areas":["大園區","大園"],"service":"Admin","dept_code":"MAN","address":"(33057)桃園市大園區中山南路二段663號2樓","tel":"03-3868700","line_id":"268ufpzb","email":"man@fuancare.com.tw","hours":"","tags":["總機","員工專用","大園"],"dept_ext":"7000","unit_ext":"7000"}];
-    const SERVICE_CODE = {"HomeCare":"HS","DayCare":"DC","Therapy":"MI","CHC":"CHC","Admin":"HQ"};
-    const SERVICE_LABEL = {"CHC":"A單位","DC":"日照中心","HS":"居家服務","HQ":"福安學院","MI":"專業服務"};
-    const SERVICE_ORDER = ["CHC","DC","HS","HQ","MI"];
+    
+    (function(){
+      'use strict';
 
-    const state = { q:"", s:new Set(), a:new Set() };
-    const $groups = document.getElementById('groups');
-    const $empty = document.getElementById('empty');
-    const $pills = Array.from(document.querySelectorAll('.pill[data-s]'));
-    const $areaChips = document.getElementById('area-chips');
-    const $serviceChips = document.getElementById('service-chips');
+      const STORAGE_KEYS = { theme: 'fuan:theme', favorites: 'fuan:favs' };
+      const MAP_DEFAULT = { center: [24.993628, 121.300979], zoom: 11 };
 
-    function normalize(s){ return (s||'').toString().toLowerCase().trim(); }
-    function uLine(u){ return (u.line_id||'').trim(); }
-    function telLink(u){ return 'tel:'+(u.tel||'').replace(/[^0-9+]/g,''); }
-    function lineLink(u){ return 'https://line.me/R/ti/p/%40'+uLine(u); }
-    function withUTM(url){ return url + (url.includes('?')?'&':'?') + 'utm_source=site&utm_medium=line_hub&utm_campaign=' + 'all-all'; }
-
-    function unitMatches(u){
-      if(state.s.size){ const code = SERVICE_CODE[u.service] || ''; if(!state.s.has(code)) return false; }
-      if(state.a.size){
-        const bases=new Set((u.areas||[]).map(x=>x.endsWith('區')?x.slice(0,-1):x)); let ok=false; state.a.forEach(a=>{ if(bases.has(a)) ok=true; });
-        if(!ok) return false;
+      if (typeof window.SERVICE_CODE === 'undefined') {
+        window.SERVICE_CODE = { HomeCare: 'HS', DayCare: 'DC', Therapy: 'MI', CHC: 'CHC', Admin: 'HQ' };
       }
-      return true;
-    }
+      if (typeof window.SERVICE_LABEL === 'undefined') {
+        window.SERVICE_LABEL = { CHC: 'A單位', DC: '日照中心', HS: '居家服務', HQ: '福安學院', MI: '專業服務' };
+      }
+      if (typeof window.SERVICE_ORDER === 'undefined') {
+        window.SERVICE_ORDER = ['CHC', 'DC', 'HS', 'HQ', 'MI'];
+      }
 
-    function card(u){
-      const isEmployeeOnly = (u.code==='MAN1');
-      const hasLine = !!uLine(u);
-      const svcCode = SERVICE_CODE[u.service] || '';
+      const SERVICE_CODE = window.SERVICE_CODE;
+      const SERVICE_LABEL = window.SERVICE_LABEL;
+      const SERVICE_ORDER = window.SERVICE_ORDER;
+      const withUTM = typeof window.withUTM === 'function' ? window.withUTM : function(url){
+        const clean = url || '';
+        const glue = clean.includes('?') ? '&' : '?';
+        return clean + glue + 'utm_source=site&utm_medium=line_hub&utm_campaign=all-all';
+      };
 
-      const c=document.createElement('article'); c.className='card';
-      const left=document.createElement('div');
-      const title=document.createElement('div'); title.className='title';
-      const h3=document.createElement('h3'); h3.textContent=u.display||u.name;
-      const code=document.createElement('span'); code.className='code'; code.textContent=u.code;
-      const badge=document.createElement('span'); badge.className='badge'; badge.textContent=SERVICE_LABEL[svcCode]||'';
-      title.appendChild(h3); title.appendChild(code); title.appendChild(badge); left.appendChild(title);
+      const refs = {
+        search: document.getElementById('q'),
+        groups: document.getElementById('groups'),
+        mapView: document.getElementById('mapView'),
+        viewList: document.getElementById('viewList'),
+        viewMap: document.getElementById('viewMap'),
+        stats: document.getElementById('stats'),
+        statCount: document.getElementById('statCount'),
+        statAreas: document.getElementById('statAreas'),
+        empty: document.getElementById('empty'),
+        suggestion: document.getElementById('suggestion'),
+        suggestionLink: document.getElementById('suggestion-link'),
+        emptySupport: document.getElementById('empty-support'),
+        liveRegion: document.getElementById('liveRegion'),
+        favoritesSection: document.getElementById('favorites-section'),
+        favoritesList: document.getElementById('favorites-list'),
+        favoritesCount: document.getElementById('favorites-count'),
+        serviceChips: document.getElementById('service-chips'),
+        areaChips: document.getElementById('area-chips'),
+        themeToggle: document.getElementById('themeToggle')
+      };
 
-      const actions=document.createElement('div');
-      const btnLine=document.createElement('a'); btnLine.className='btn btn-line'; btnLine.textContent=isEmployeeOnly?'員工專用':'加入 LINE ↗';
-      if(isEmployeeOnly || !hasLine){ btnLine.classList.add('is-off'); btnLine.setAttribute('aria-disabled','true'); }
-      else { btnLine.href=withUTM(lineLink(u)); btnLine.target='_blank'; btnLine.rel='noopener'; }
-      const btnCall=document.createElement('a'); btnCall.className='btn btn-call'; btnCall.href=telLink(u); btnCall.textContent='撥打電話';
-      actions.appendChild(btnLine); actions.appendChild(btnCall);
+      const serviceControls = new Map();
+      const areaControls = new Map();
 
-      const meta=document.createElement('div'); meta.className='meta';
-      const areasFull=(u.areas||[]).map(a=>a.endsWith('區')?a:a+'區').filter((v,i,self)=>self.indexOf(v)===i);
-      const deptExt = u.dept_ext ? `代表號：${u.dept_ext}` : '';
-      const unitExt = u.unit_ext ? `單位分機：${u.unit_ext}` : '';
-      meta.innerHTML = `
-        <span>服務區域：${areasFull.join('、')}</span>
-        <span>電話：<a href="${telLink(u)}">${(u.tel||'')}</a>${deptExt || unitExt ? '（'+[deptExt,unitExt].filter(Boolean).join('｜')+'）' : ''}</span>
-        <span>地址：${(u.address||'')}</span>
-      `;
+      const favorites = loadFavorites();
+      const state = {
+        query: '',
+        services: new Set(),
+        areas: new Set(),
+        view: 'list',
+        results: [],
+        favorites
+      };
 
-      const small=document.createElement('div'); small.className='smallnote'; small.textContent='實際服務以各單位公告為準。';
+      const enhancedUnits = (Array.isArray(window.UNITS) ? window.UNITS : []).map(enhanceUnit);
+      const allAreaBases = Array.from(new Set(enhancedUnits.flatMap(unit => unit.areaBases))).sort((a, b) => a.localeCompare(b, 'zh-Hant'));
 
-      c.appendChild(left); c.appendChild(actions); c.appendChild(meta); c.appendChild(small);
-      return c;
-    }
+      let mapInstance = null;
+      let markerLayer = null;
 
-    function renderGroups(){
-      const filtered = UNITS.filter(unitMatches);
-      $groups.innerHTML = '';
-      if(!filtered.length){ $empty.hidden=false; return; }
-      $empty.hidden=true;
-      SERVICE_ORDER.forEach(code=>{
-        const items=filtered.filter(u => (SERVICE_CODE[u.service]||'')===code);
-        if(!items.length) return;
-        const group=document.createElement('section'); group.className='group';
-        const h2=document.createElement('h2'); h2.textContent=(SERVICE_LABEL[code]||code)+'（'+items.length+'）';
-        const grid=document.createElement('div'); grid.className='grid';
-        items.sort((a,b)=>{ const aOn=!!uLine(a), bOn=!!uLine(b); if(aOn!==bOn) return aOn?-1:1; return (a.code||'').localeCompare(b.code||''); });
-        items.forEach(u => grid.appendChild(card(u)));
-        group.appendChild(h2); group.appendChild(grid); $groups.appendChild(group);
-      });
-    }
+      initTheme();
+      initSearch();
+      initPills();
+      initChips();
+      initViewToggle();
+      initSuggestionLinks();
+      renderFavorites();
+      applyFilters();
 
-    // Init: chips + pills (chips kept simple here)
-    const areaBases = Array.from(new Set(UNITS.flatMap(u => (u.areas||[]).map(a=>a.endsWith('區')?a.slice(0,-1):a))));
-    areaBases.forEach(base=>{ const el=document.createElement('span'); el.className='chip'; el.textContent=base; el.addEventListener('click',()=>{ if(state.a.has(base)) state.a.delete(base); else state.a.add(base); el.classList.toggle('is-on'); renderGroups(); }); $areaChips.appendChild(el); });
-    ["CHC","DC","HS","HQ","MI"].forEach(code=>{ const el=document.createElement('span'); el.className='chip'; el.textContent=SERVICE_LABEL[code]; el.addEventListener('click',()=>{ if(state.s.has(code)) state.s.delete(code); else state.s.add(code); el.classList.toggle('is-on'); renderGroups(); }); $serviceChips.appendChild(el); });
-    document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{ const on=p.getAttribute('aria-pressed')==='true'; p.setAttribute('aria-pressed', on?'false':'true'); if(on) state.s.delete(p.dataset.s); else state.s.add(p.dataset.s); renderGroups(); document.getElementById('groups').scrollIntoView({behavior:'smooth'}); }));
+      function enhanceUnit(unit){
+        const serviceCode = SERVICE_CODE[unit.service] || unit.service || '';
+        const serviceLabel = SERVICE_LABEL[serviceCode] || serviceCode || '';
+        const areaNames = Array.isArray(unit.areas) ? unit.areas.filter(Boolean) : [];
+        const areaBases = Array.from(new Set(areaNames.map(a => {
+          const trimmed = (a || '').trim();
+          if (!trimmed) return '';
+          return trimmed.endsWith('區') ? trimmed.slice(0, -1) : trimmed;
+        }).filter(Boolean)));
+        const tags = Array.isArray(unit.tags) ? unit.tags.filter(Boolean) : unit.tags ? [unit.tags] : [];
+        const lat = unit.lat === 0 ? 0 : Number(unit.lat);
+        const lng = unit.lng === 0 ? 0 : Number(unit.lng);
+        const latLng = Number.isFinite(lat) && Number.isFinite(lng) ? { lat, lng } : null;
+        const searchParts = [
+          unit.display,
+          unit.name,
+          unit.code,
+          unit.address,
+          areaNames.join(' '),
+          areaBases.join(' '),
+          tags.join(' '),
+          serviceLabel
+        ];
+        return Object.assign({}, unit, {
+          serviceCode,
+          serviceLabel,
+          areaNames,
+          areaBases,
+          tags,
+          latLng,
+          hasLine: Boolean((unit.line_id || '').trim()),
+          searchText: searchParts.filter(Boolean).map(normalize).join(' ')
+        });
+      }
 
-    renderGroups();
+      function normalize(value){
+        return (value || '').toString().toLowerCase().replace(/\s+/g, ' ').trim();
+      }
+
+      function loadFavorites(){
+        try {
+          const raw = window.localStorage.getItem(STORAGE_KEYS.favorites);
+          if (!raw) return new Set();
+          const parsed = JSON.parse(raw);
+          return new Set(Array.isArray(parsed) ? parsed : []);
+        } catch (err) {
+          return new Set();
+        }
+      }
+
+      function saveFavorites(){
+        try {
+          const list = Array.from(state.favorites);
+          window.localStorage.setItem(STORAGE_KEYS.favorites, JSON.stringify(list));
+        } catch (err) {
+          // ignore write errors
+        }
+      }
+
+      function initTheme(){
+        const root = document.documentElement;
+        const saved = (() => {
+          try { return window.localStorage.getItem(STORAGE_KEYS.theme); } catch (err) { return null; }
+        })();
+        if (saved === 'dark') {
+          root.setAttribute('data-theme', 'dark');
+        }
+        updateThemeToggle();
+        if (refs.themeToggle) {
+          refs.themeToggle.addEventListener('click', () => {
+            const isDark = root.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+              root.removeAttribute('data-theme');
+              try { window.localStorage.setItem(STORAGE_KEYS.theme, 'light'); } catch (err) {}
+            } else {
+              root.setAttribute('data-theme', 'dark');
+              try { window.localStorage.setItem(STORAGE_KEYS.theme, 'dark'); } catch (err) {}
+            }
+            updateThemeToggle();
+          });
+        }
+      }
+
+      function updateThemeToggle(){
+        if (!refs.themeToggle) return;
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        refs.themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        refs.themeToggle.textContent = isDark ? '🌞 淺色模式' : '🌙 深色模式';
+        refs.themeToggle.setAttribute('aria-label', isDark ? '切換為淺色模式' : '切換為深色模式');
+      }
+
+      function initSearch(){
+        if (!refs.search) return;
+        state.query = normalize(refs.search.value);
+        refs.search.addEventListener('input', () => {
+          state.query = normalize(refs.search.value);
+          applyFilters();
+        });
+      }
+
+      function initPills(){
+        const pills = Array.from(document.querySelectorAll('.pill[data-s]'));
+        pills.forEach(pill => {
+          const code = pill.dataset.s;
+          if (!code) return;
+          registerServiceControl(code, pill);
+          pill.addEventListener('click', () => {
+            toggleService(code);
+            if (refs.groups) {
+              refs.groups.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+      }
+
+      function initChips(){
+        if (refs.serviceChips) {
+          SERVICE_ORDER.forEach(code => {
+            const label = SERVICE_LABEL[code] || code;
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'chip';
+            btn.textContent = label;
+            btn.setAttribute('aria-pressed', 'false');
+            registerServiceControl(code, btn);
+            btn.addEventListener('click', () => toggleService(code));
+            refs.serviceChips.appendChild(btn);
+          });
+        }
+        if (refs.areaChips) {
+          allAreaBases.forEach(area => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'chip';
+            btn.textContent = area;
+            btn.setAttribute('aria-pressed', 'false');
+            registerAreaControl(area, btn);
+            btn.addEventListener('click', () => toggleArea(area));
+            refs.areaChips.appendChild(btn);
+          });
+        }
+      }
+
+      function initViewToggle(){
+        if (refs.viewList) {
+          refs.viewList.addEventListener('click', () => setView('list'));
+        }
+        if (refs.viewMap) {
+          refs.viewMap.addEventListener('click', () => setView('map'));
+        }
+        updateViewControls();
+      }
+
+      function initSuggestionLinks(){
+        const academyUrl = withUTM('https://line.me/R/ti/p/%40817igqdq');
+        if (refs.suggestionLink) {
+          refs.suggestionLink.href = academyUrl;
+        }
+        if (refs.emptySupport) {
+          refs.emptySupport.href = academyUrl;
+        }
+      }
+
+      function registerServiceControl(code, el){
+        if (!serviceControls.has(code)) {
+          serviceControls.set(code, []);
+        }
+        serviceControls.get(code).push(el);
+      }
+
+      function registerAreaControl(area, el){
+        if (!areaControls.has(area)) {
+          areaControls.set(area, []);
+        }
+        areaControls.get(area).push(el);
+      }
+
+      function toggleService(code){
+        if (state.services.has(code)) {
+          state.services.delete(code);
+        } else {
+          state.services.add(code);
+        }
+        syncServiceControls(code);
+        applyFilters();
+      }
+
+      function toggleArea(area){
+        if (state.areas.has(area)) {
+          state.areas.delete(area);
+        } else {
+          state.areas.add(area);
+        }
+        syncAreaControls(area);
+        applyFilters();
+      }
+
+      function syncServiceControls(code){
+        const isActive = state.services.has(code);
+        const controls = serviceControls.get(code) || [];
+        controls.forEach(el => {
+          el.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+      }
+
+      function syncAreaControls(area){
+        const isActive = state.areas.has(area);
+        const controls = areaControls.get(area) || [];
+        controls.forEach(el => {
+          el.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+      }
+
+      function setView(view){
+        if (state.view === view) return;
+        state.view = view;
+        updateViewControls();
+        updateViewVisibility();
+        if (view === 'map') {
+          renderMap(state.results);
+        }
+      }
+
+      function updateViewControls(){
+        if (refs.viewList) {
+          refs.viewList.setAttribute('aria-pressed', state.view === 'list' ? 'true' : 'false');
+        }
+        if (refs.viewMap) {
+          refs.viewMap.setAttribute('aria-pressed', state.view === 'map' ? 'true' : 'false');
+        }
+        updateViewVisibility();
+      }
+
+      function updateViewVisibility(){
+        if (refs.groups) {
+          refs.groups.classList.toggle('hidden', state.view === 'map');
+        }
+        if (refs.mapView) {
+          if (state.view === 'map') {
+            refs.mapView.removeAttribute('hidden');
+            if (mapInstance) {
+              setTimeout(() => mapInstance.invalidateSize(), 120);
+            }
+          } else {
+            refs.mapView.setAttribute('hidden', '');
+          }
+        }
+      }
+
+      function applyFilters(){
+        let filtered = enhancedUnits.filter(unit => {
+          if (state.services.size && !state.services.has(unit.serviceCode)) {
+            return false;
+          }
+          if (state.areas.size) {
+            const hasArea = unit.areaBases.some(area => state.areas.has(area));
+            if (!hasArea) return false;
+          }
+          if (state.query) {
+            return unit.searchText.includes(state.query);
+          }
+          return true;
+        });
+        filtered.sort(sortUnits);
+        state.results = filtered;
+        renderGroups(filtered);
+        if (state.view === 'map') {
+          renderMap(filtered);
+        }
+        updateStats(filtered);
+        updateSuggestion(filtered);
+        updateEmptyState(filtered);
+        updateLiveRegion(filtered);
+      }
+
+      function sortUnits(a, b){
+        if (a.hasLine !== b.hasLine) {
+          return a.hasLine ? -1 : 1;
+        }
+        return (a.code || '').localeCompare(b.code || '', 'zh-Hant-u-nu-latn', { numeric: true, sensitivity: 'base' });
+      }
+
+      function renderGroups(units){
+        if (!refs.groups) return;
+        refs.groups.innerHTML = '';
+        SERVICE_ORDER.forEach(code => {
+          const groupUnits = units.filter(unit => unit.serviceCode === code);
+          if (!groupUnits.length) return;
+          const section = document.createElement('section');
+          section.className = 'group';
+          const heading = document.createElement('h2');
+          heading.textContent = `${SERVICE_LABEL[code] || code}（${groupUnits.length}）`;
+          section.appendChild(heading);
+          const grid = document.createElement('div');
+          grid.className = 'grid';
+          groupUnits.forEach(unit => {
+            grid.appendChild(createCard(unit));
+          });
+          section.appendChild(grid);
+          refs.groups.appendChild(section);
+        });
+      }
+
+      function createCard(unit){
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.setAttribute('data-code', unit.code);
+
+        const titleWrap = document.createElement('div');
+        titleWrap.className = 'title';
+        const h3 = document.createElement('h3');
+        h3.textContent = unit.display || unit.name || unit.code;
+        const code = document.createElement('span');
+        code.className = 'code';
+        code.textContent = unit.code;
+        const badge = document.createElement('span');
+        badge.className = 'badge';
+        badge.textContent = unit.serviceLabel || '';
+        titleWrap.appendChild(h3);
+        titleWrap.appendChild(code);
+        titleWrap.appendChild(badge);
+
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+        const isEmployeeOnly = unit.tags.some(tag => /員工/.test(tag)) || unit.code === 'MAN1';
+        const hasLine = unit.hasLine && !isEmployeeOnly;
+        const lineUrl = hasLine ? withUTM(`https://line.me/R/ti/p/%40${(unit.line_id || '').trim()}`) : '';
+        const callUrl = unit.tel ? buildTel(unit.tel) : '';
+        const navUrl = buildNavUrl(unit);
+
+        actions.appendChild(createActionLink({
+          className: 'btn-line',
+          label: hasLine ? '加入 LINE ↗' : '員工專用',
+          href: lineUrl,
+          disabled: !hasLine,
+          newTab: true
+        }));
+        actions.appendChild(createActionLink({
+          className: 'btn-call',
+          label: unit.tel ? '撥打電話' : '電話暫缺',
+          href: callUrl,
+          disabled: !unit.tel
+        }));
+        actions.appendChild(createActionLink({
+          className: 'btn-nav',
+          label: navUrl ? '地圖導航' : '地址暫缺',
+          href: navUrl,
+          disabled: !navUrl,
+          newTab: Boolean(navUrl)
+        }));
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        const areas = unit.areaNames.length ? Array.from(new Set(unit.areaNames.map(name => name.endsWith('區') ? name : `${name}區`))).join('、') : '未提供';
+        const deptExt = unit.dept_ext ? `代表號：${unit.dept_ext}` : '';
+        const unitExt = unit.unit_ext ? `單位分機：${unit.unit_ext}` : '';
+        const phoneInfo = [deptExt, unitExt].filter(Boolean).join('｜');
+
+        const areaSpan = document.createElement('span');
+        areaSpan.textContent = `服務區域：${areas}`;
+        meta.appendChild(areaSpan);
+
+        const phoneSpan = document.createElement('span');
+        if (unit.tel) {
+          phoneSpan.append('電話：');
+          const telAnchor = document.createElement('a');
+          telAnchor.href = callUrl;
+          telAnchor.textContent = unit.tel;
+          phoneSpan.appendChild(telAnchor);
+          if (phoneInfo) {
+            phoneSpan.append(`（${phoneInfo}）`);
+          }
+        } else {
+          phoneSpan.textContent = '電話：未提供';
+        }
+        meta.appendChild(phoneSpan);
+
+        const addressSpan = document.createElement('span');
+        addressSpan.textContent = `地址：${unit.address || '未提供'}`;
+        meta.appendChild(addressSpan);
+
+        const note = document.createElement('div');
+        note.className = 'smallnote';
+        note.textContent = '實際服務以各單位公告為準。';
+
+        const favBtn = document.createElement('button');
+        favBtn.type = 'button';
+        favBtn.className = 'fav-btn';
+        favBtn.setAttribute('aria-label', state.favorites.has(unit.code) ? '從收藏移除' : '加入收藏');
+        favBtn.setAttribute('aria-pressed', state.favorites.has(unit.code) ? 'true' : 'false');
+        favBtn.textContent = state.favorites.has(unit.code) ? '★' : '☆';
+        favBtn.addEventListener('click', () => toggleFavorite(unit));
+
+        card.appendChild(titleWrap);
+        card.appendChild(actions);
+        card.appendChild(meta);
+        card.appendChild(note);
+        card.appendChild(favBtn);
+
+        return card;
+      }
+
+      function buildTel(tel){
+        return `tel:${(tel || '').replace(/[^0-9+]/g, '')}`;
+      }
+
+      function buildNavUrl(unit){
+        if (unit.latLng) {
+          const { lat, lng } = unit.latLng;
+          return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${lat},${lng}`)}`;
+        }
+        if (unit.address) {
+          return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(unit.address)}`;
+        }
+        return '';
+      }
+
+      function createActionLink(options){
+        const { className, label, href, disabled, newTab } = options;
+        const el = document.createElement('a');
+        el.className = `btn ${className}`;
+        el.textContent = label;
+        if (disabled) {
+          el.classList.add('is-off');
+          el.setAttribute('aria-disabled', 'true');
+          el.tabIndex = -1;
+        } else {
+          el.href = href;
+          if (newTab) {
+            el.target = '_blank';
+            el.rel = 'noopener';
+          }
+        }
+        return el;
+      }
+
+      function toggleFavorite(unit){
+        const code = unit.code;
+        if (state.favorites.has(code)) {
+          state.favorites.delete(code);
+        } else {
+          state.favorites.add(code);
+        }
+        saveFavorites();
+        renderFavorites();
+        renderGroups(state.results);
+      }
+
+      function renderFavorites(){
+        if (!refs.favoritesSection || !refs.favoritesList) return;
+        const favUnits = enhancedUnits.filter(unit => state.favorites.has(unit.code));
+        if (!favUnits.length) {
+          refs.favoritesSection.hidden = true;
+          if (refs.favoritesCount) {
+            refs.favoritesCount.textContent = '0';
+          }
+          return;
+        }
+        refs.favoritesSection.hidden = false;
+        refs.favoritesList.innerHTML = '';
+        favUnits.sort(sortUnits).forEach(unit => {
+          refs.favoritesList.appendChild(createCard(unit));
+        });
+        if (refs.favoritesCount) {
+          refs.favoritesCount.textContent = String(favUnits.length);
+        }
+      }
+
+      function renderMap(units){
+        if (!refs.mapView || typeof L === 'undefined') return;
+        if (!mapInstance) {
+          mapInstance = L.map(refs.mapView, { scrollWheelZoom: false });
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap 貢獻者'
+          }).addTo(mapInstance);
+          markerLayer = L.layerGroup().addTo(mapInstance);
+        }
+        markerLayer.clearLayers();
+        const boundsPoints = [];
+        units.forEach(unit => {
+          if (!unit.latLng) return;
+          const marker = L.marker([unit.latLng.lat, unit.latLng.lng]);
+          marker.bindPopup(createPopup(unit));
+          markerLayer.addLayer(marker);
+          boundsPoints.push([unit.latLng.lat, unit.latLng.lng]);
+        });
+        if (boundsPoints.length === 1) {
+          mapInstance.setView(boundsPoints[0], 16);
+        } else if (boundsPoints.length > 1) {
+          const bounds = L.latLngBounds(boundsPoints);
+          mapInstance.fitBounds(bounds.pad(0.12));
+        } else {
+          mapInstance.setView(MAP_DEFAULT.center, MAP_DEFAULT.zoom);
+        }
+        if (state.view === 'map') {
+          setTimeout(() => mapInstance.invalidateSize(), 120);
+        }
+      }
+
+      function createPopup(unit){
+        const container = document.createElement('div');
+        container.className = 'map-popup';
+        const title = document.createElement('strong');
+        title.textContent = unit.display || unit.name || unit.code;
+        container.appendChild(title);
+        if (unit.address) {
+          const addr = document.createElement('div');
+          addr.textContent = unit.address;
+          container.appendChild(addr);
+        }
+        const actions = document.createElement('div');
+        actions.className = 'popup-actions';
+        const isEmployeeOnly = unit.tags.some(tag => /員工/.test(tag)) || unit.code === 'MAN1';
+        const hasLine = unit.hasLine && !isEmployeeOnly;
+        actions.appendChild(createActionLink({
+          className: 'btn-line',
+          label: hasLine ? '加入 LINE ↗' : '員工專用',
+          href: hasLine ? withUTM(`https://line.me/R/ti/p/%40${(unit.line_id || '').trim()}`) : '',
+          disabled: !hasLine,
+          newTab: true
+        }));
+        actions.appendChild(createActionLink({
+          className: 'btn-call',
+          label: unit.tel ? '撥打電話' : '電話暫缺',
+          href: unit.tel ? buildTel(unit.tel) : '',
+          disabled: !unit.tel
+        }));
+        const navUrl = buildNavUrl(unit);
+        actions.appendChild(createActionLink({
+          className: 'btn-nav',
+          label: navUrl ? '地圖導航' : '地址暫缺',
+          href: navUrl,
+          disabled: !navUrl,
+          newTab: Boolean(navUrl)
+        }));
+        container.appendChild(actions);
+        return container;
+      }
+
+      function updateStats(units){
+        if (!refs.statCount || !refs.statAreas) return;
+        refs.statCount.textContent = `共 ${units.length} 個單位`;
+        const areas = state.areas.size ? Array.from(state.areas).join('、') : '全部';
+        refs.statAreas.textContent = `地區：${areas}`;
+      }
+
+      function updateSuggestion(units){
+        if (!refs.suggestion) return;
+        if (units.length <= 2) {
+          refs.suggestion.hidden = false;
+        } else {
+          refs.suggestion.hidden = true;
+        }
+      }
+
+      function updateEmptyState(units){
+        if (!refs.empty) return;
+        if (!units.length) {
+          refs.empty.hidden = false;
+        } else {
+          refs.empty.hidden = true;
+        }
+      }
+
+      function updateLiveRegion(units){
+        if (!refs.liveRegion) return;
+        const areaText = state.areas.size ? `，已選地區：${Array.from(state.areas).join('、')}` : '';
+        refs.liveRegion.textContent = `共 ${units.length} 個符合條件的單位${areaText}`;
+      }
+    })();
   </script>
 </body>
 </html>
